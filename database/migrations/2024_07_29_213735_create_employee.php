@@ -15,9 +15,17 @@ class CreateEmployee extends Migration
     {
         Schema::create('employee', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->string('email')->unique();
             $table->string('profile_picture');
+            $table->string('full_name');
+            $table->integer('age');
+            $table->date('birth');
+            $table->integer('phone')->nullable();
+            $table->string('email')->unique();
+            $table->string('gender');
+            $table->string('status');
+            $table->string('work');
+            $table->string('type');
+            $table->string('address');
             $table->timestamps();
         });
     }

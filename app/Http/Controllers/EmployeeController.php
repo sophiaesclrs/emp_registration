@@ -11,9 +11,17 @@ class EmployeeController extends Controller
     public function registerEmp(Request $request)
     {
         $validatedData = $request->validate([
+            'profile_picture' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'full_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:employee',
-            'profile_picture' => 'required|file|mimes:jpg,jpeg,png|max:2048',
+            'age' => 'required|integer|min:1|max:150', // Assuming maximum age is 150
+            'birth' => 'required|date',
+            'phone' => 'nullable|digits_between:10,15', // Assuming phone number can be between 10 to 15 digits
+            'email' => 'required|email|unique:employees,email',
+            'gender' => 'required|string',
+            'civil_status' => 'required|string',
+            'work_position' => 'required|string|max:255',
+            'type_of_work' => 'required|string',
+            'address' => 'required|string|max:255',
         ]);
 
         // Handle the file upload
@@ -25,10 +33,19 @@ class EmployeeController extends Controller
         }
 
         $employee = new Employee();
-        $employee->full_name = $validatedData['full_name'];
-        $employee->email = $validatedData['email'];
         $employee->profile_picture = $filePath;
+        $employee->full_name = $validatedData['full_name'];
+        $employee->age = $validatedData['age'];
+        $employee->birth = $validatedData['birth'];
+        $employee->phone = $validatedData['phone'];
+        $employee->email = $validatedData['email'];
+        $employee->gender = $validatedData['gender'];
+        $employee->status = $validatedData['status'];
+        $employee->work = $validatedData['work'];
+        $employee->type = $validatedData['type'];
+        $employee->address = $validatedData['address'];
         $employee->save();
+
     }
 
     public function getEmployees(){

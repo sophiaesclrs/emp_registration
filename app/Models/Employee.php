@@ -12,8 +12,16 @@ class Employee extends Model
     protected $table = 'employee';
 
     protected $fillable = [
-        'full_name',
-        'email',
         'profile_picture',
+        'full_name',
+        'age',
+        'birth',
+        'phone',
+        'email',
+        'gender',
+        'status',
+        'work',
+        'type',
+        'address',
     ];
 }
